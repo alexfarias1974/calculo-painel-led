@@ -5,6 +5,7 @@ import {
   CABINET_SIZES, 
   getRecommendedPitchByDistance 
 } from './data/ledCatalog';
+import ChecklistPage from './components/ChecklistPage';
 
 // ─── Icons (inline SVG) ───────────────────────────────────────────────────
 const IconMonitor = () => (
@@ -38,6 +39,12 @@ const IconBook = () => (
 const IconTarget = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+  </svg>
+);
+const IconClipboard = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
   </svg>
 );
 const IconChevronDown = ({ open }) => (
@@ -208,6 +215,9 @@ function CabinetVisualizer({ result }) {
 
 // ─── Main App ───────────────────────────────────────────────────────────────
 export default function App() {
+  // Navigation View: 'calculator' | 'checklist'
+  const [currentView, setCurrentView] = useState('calculator');
+
   // Educational Guide Card Toggle State
   const [showGuide, setShowGuide] = useState(true);
 
@@ -260,15 +270,75 @@ export default function App() {
 
   const currentPitchObj = PITCH_PRESETS.find(p => p.id === pitchId) || PITCH_PRESETS[5];
 
+  // If in Checklist view, render the dedicated Checklist page
+  if (currentView === 'checklist') {
+    return (
+      <div className="app-wrapper">
+        <header className="app-header no-print">
+          <div className="app-header-inner">
+            <div className="app-logo">
+              <img src="/logo.png" alt="AC" className="header-logo-img" />
+              <div className="logo-text-wrapper">
+                <div className="logo-tag">Checklist Técnico de Campo & Cotação</div>
+              </div>
+            </div>
+
+            <nav className="header-nav">
+              <button 
+                className="header-nav-btn"
+                onClick={() => setCurrentView('calculator')}
+              >
+                📐 Calculador de Painel
+              </button>
+              <button 
+                className="header-nav-btn active"
+                onClick={() => setCurrentView('checklist')}
+              >
+                📋 Checklist do Projeto
+              </button>
+            </nav>
+          </div>
+        </header>
+
+        <ChecklistPage 
+          result={result} 
+          onBack={() => setCurrentView('calculator')} 
+        />
+
+        <footer className="no-print" style={{ borderTop: '1px solid #1e2330', padding: '16px 24px', textAlign: 'center', fontSize: 12, color: '#334155' }}>
+          AC Display — Plataforma de Dimensionamento de LED & Consultoria Técnica
+        </footer>
+      </div>
+    );
+  }
+
+  // Otherwise render Calculator view
   return (
     <div className="app-wrapper">
       {/* ── Header ── */}
       <header className="app-header">
-        <div className="app-logo">
-          <img src="/logo.png" alt="AC" className="header-logo-img" />
-          <div className="logo-text-wrapper">
-            <div className="logo-tag">Calculador de Painel de LED & Consultoria Técnica</div>
+        <div className="app-header-inner">
+          <div className="app-logo">
+            <img src="/logo.png" alt="AC" className="header-logo-img" />
+            <div className="logo-text-wrapper">
+              <div className="logo-tag">Calculador de Painel de LED & Consultoria Técnica</div>
+            </div>
           </div>
+
+          <nav className="header-nav">
+            <button 
+              className="header-nav-btn active"
+              onClick={() => setCurrentView('calculator')}
+            >
+              📐 Calculador
+            </button>
+            <button 
+              className="header-nav-btn"
+              onClick={() => setCurrentView('checklist')}
+            >
+              📋 Checklist
+            </button>
+          </nav>
         </div>
       </header>
 
@@ -652,6 +722,24 @@ export default function App() {
               </table>
             </div>
 
+            {/* Checklist Callout Card */}
+            <div className="checklist-callout-card">
+              <div className="checklist-callout-info">
+                <h3 className="checklist-callout-title">
+                  <IconClipboard /> Pronto para o Levantamento Técnico do Projeto?
+                </h3>
+                <p className="checklist-callout-desc">
+                  Transfira automaticamente as medidas, gabinetes e resolução deste cálculo para o <strong>Checklist Técnico de Campo</strong> e gere um relatório em PDF pronto para o cliente e equipe de instalação.
+                </p>
+              </div>
+              <button 
+                className="btn-checklist-action"
+                onClick={() => setCurrentView('checklist')}
+              >
+                <IconClipboard /> Abrir Checklist do Projeto
+              </button>
+            </div>
+
           </div>
         )}
 
@@ -663,13 +751,20 @@ export default function App() {
               <path d="M8 21h8M12 17v4"/>
             </svg>
             <p>Preencha os campos acima e clique em <strong>Calcular Painel</strong>.</p>
+            <button 
+              className="btn-secondary" 
+              style={{ marginTop: '16px' }}
+              onClick={() => setCurrentView('checklist')}
+            >
+              <IconClipboard /> Ou abrir Checklist em branco
+            </button>
           </div>
         )}
 
       </div>
 
       {/* Footer */}
-      <footer style={{ borderTop: '1px solid #1e2330', padding: '16px 24px', textAlign: 'center', fontSize: 12, color: '#334155' }}>
+      <footer className="no-print" style={{ borderTop: '1px solid #1e2330', padding: '16px 24px', textAlign: 'center', fontSize: 12, color: '#334155' }}>
         AC Display — Plataforma de Dimensionamento de LED & Consultoria Técnica
       </footer>
     </div>
