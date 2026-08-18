@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">AC Display LED</string>
+    <string name="title_activity_main">AC Display LED</string>
+    <string name="package_name">com.acdisplay.calculoled</string>
+    <string name="custom_url_scheme">com.acdisplay.calculoled</string>
+</resources>
