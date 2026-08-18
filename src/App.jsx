@@ -195,10 +195,10 @@ function CabinetVisualizer({ result }) {
         )}
 
         {/* Panel border */}
-        <rect x={startX} y={startY} width={pW} height={pH} fill="none" stroke="#2563eb" strokeWidth="1.5" rx="2" />
+        <rect x={startX} y={startY} width={pW} height={pH} fill="none" stroke="#e6007e" strokeWidth="1.5" rx="2" />
 
         {/* Diagonal */}
-        <text x={startX + pW / 2} y={startY + pH / 2 + 5} fill="#1e3a5f" fontSize="13" fontFamily="JetBrains Mono" textAnchor="middle" fontWeight="600">
+        <text x={startX + pW / 2} y={startY + pH / 2 + 5} fill="#9d174d" fontSize="13" fontFamily="JetBrains Mono" textAnchor="middle" fontWeight="600">
           {diagInches}"
         </text>
       </svg>
@@ -265,9 +265,8 @@ export default function App() {
       {/* ── Header ── */}
       <header className="app-header">
         <div className="app-logo">
-          <div className="logo-icon"><IconMonitor /></div>
-          <div>
-            <div className="logo-text">AC <span>DISPLAY</span></div>
+          <img src="/logo.png" alt="AC" className="header-logo-img" />
+          <div className="logo-text-wrapper">
             <div className="logo-tag">Calculador de Painel de LED & Consultoria Técnica</div>
           </div>
         </div>
