@@ -1,11 +1,16 @@
 {
   "short_name": "AC Display",
-  "name": "AC Display — Calculador de LED",
+  "name": "AC Display — Calculador de Painel de LED",
   "icons": [
     {
-      "src": "/vite.svg",
-      "type": "image/svg+xml",
-      "sizes": "192x192 512x512"
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": "/",
