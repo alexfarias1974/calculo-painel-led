@@ -24,6 +24,7 @@ export const CABINET_SIZES = [
   { id: 'c500x500',  label: '500 × 500 mm — Rental Quadrado',   widthMm: 500,   heightMm: 500   },
   { id: 'c500x1000', label: '500 × 1000 mm — Rental Alto',      widthMm: 500,   heightMm: 1000  },
   { id: 'c640x480',  label: '640 × 480 mm — Padrão 4:3',        widthMm: 640,   heightMm: 480   },
+  { id: 'c640x640',  label: '640 × 640 mm — Quadrado Comercial',widthMm: 640,   heightMm: 640   },
   { id: 'c960x960',  label: '960 × 960 mm — Outdoor Pesado',    widthMm: 960,   heightMm: 960   },
 ];
 
